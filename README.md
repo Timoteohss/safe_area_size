@@ -5,7 +5,7 @@ A plugin to get the SafeArea size using platform channels, making it easy to des
 ## Why?
 
 The way [SafeArea](https://api.flutter.dev/flutter/widgets/SafeArea-class.html) is designed, 
-if you insert your root structure, you no longer have access to changes of MediaQuery Insets or Padding.
+if you insert it into your root structure, you no longer have access to changes of MediaQuery Insets or Padding.
 
 So I've made this plugin to work around this limitation, allowing access to these values anyway.
 

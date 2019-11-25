@@ -38,12 +38,17 @@ class SafeAreaSizePlugin: MethodCallHandler {
     return (navSize / mRegistrar.activity().resources.displayMetrics.density).toInt()
   }
 
+    private fun getDisplayCutout(): Int {
+        return mRegistrar.activity().window.decorView.rootWindowInsets.displayCutout.safeInsetTop
+    }
+
 
   override fun onMethodCall(call: MethodCall, result: Result) {
 
     when(call.method) {
       "getStatusBar" -> result.success(getStatusBar())
       "getNavigationBar" -> result.success(getNavigationBar())
+      "getDisplayCutout" -> result.success(getDisplayCutout())
       else -> result.notImplemented()
     }
   }

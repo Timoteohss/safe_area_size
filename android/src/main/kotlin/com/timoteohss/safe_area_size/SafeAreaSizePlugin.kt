@@ -39,7 +39,7 @@ class SafeAreaSizePlugin: MethodCallHandler {
   }
 
     private fun getDisplayCutout(): Int {
-        return mRegistrar.activity().window.decorView.rootWindowInsets.displayCutout.safeInsetTop
+        return (mRegistrar.activity().window.decorView.rootWindowInsets.displayCutout.safeInsetTop / mRegistrar.activity().resources.displayMetrics.density).toInt()
     }
 
 

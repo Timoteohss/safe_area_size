@@ -16,6 +16,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await SafeAreaSize.platformVersion, '42');
+    expect(await SafeAreaSize.displayCutoutSize, '42');
   });
 }

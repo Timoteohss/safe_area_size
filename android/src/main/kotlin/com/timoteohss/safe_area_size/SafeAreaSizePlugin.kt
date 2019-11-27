@@ -48,7 +48,7 @@ class SafeAreaSizePlugin : MethodCallHandler {
     }
 
 
-    override fun onMethodCall(call: MethodCall, result: Result<Any>) {
+    override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
             "getStatusBar" -> result.success(getStatusBar())
             "getNavigationBar" -> result.success(getNavigationBar())

@@ -39,11 +39,15 @@ class SafeAreaSizePlugin: MethodCallHandler {
   }
 
     private fun getDisplayCutout(): Int {
-      val displayCutout = mRegistrar.activity().window.decorView.rootWindowInsets.displayCutout;
-      if (displayCutout == null) {
-        return 0;
+      if (Build.VERSION.SDK_INT >= 28) {
+        val displayCutout = mRegistrar.activity().window.decorView.rootWindowInsets.displayCutout;
+        if (displayCutout == null) {
+          return 0;
+        } else {
+          return (mRegistrar.activity().window.decorView.rootWindowInsets.displayCutout.safeInsetTop / mRegistrar.activity().resources.displayMetrics.density).toInt()
+        }
       } else {
-        return (mRegistrar.activity().window.decorView.rootWindowInsets.displayCutout.safeInsetTop / mRegistrar.activity().resources.displayMetrics.density).toInt()
+        return 0;
       }
     }
 

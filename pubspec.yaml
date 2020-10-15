@@ -1,6 +1,6 @@
 name: safe_area_size
 description: A plugin to get the SafeArea size using platform channels, making it easy to design around SafeArea's limitations.
-version: 0.1.1
+version: 0.2.0
 author: Timóteo Holanda <timoteohss@gmail.com>
 homepage: https://github.com/Timoteohss/safe_area_size
 

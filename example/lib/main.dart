@@ -14,6 +14,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _navigationBarHeight = 0;
   int _statusBarHeight = 0;
+  int _displayCutoutSize = 0;
 
   @override
   void initState() {
@@ -25,14 +26,17 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     int navigationBarHeight;
     int statusBarHeigth;
+    int displayCutoutSize;
 
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       statusBarHeigth = await SafeAreaSize.statusBarSize;
       navigationBarHeight = await SafeAreaSize.navigationBarSize;
+      displayCutoutSize = await SafeAreaSize.displayCutoutSize;
     } on PlatformException {
       statusBarHeigth = 0;
       navigationBarHeight = 0;
+      displayCutoutSize = 0;
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -43,6 +47,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _statusBarHeight = statusBarHeigth;
       _navigationBarHeight = navigationBarHeight;
+      _displayCutoutSize = displayCutoutSize;
     });
   }
 
@@ -55,34 +60,40 @@ class _MyAppState extends State<MyApp> {
             title: const Text('Plugin example app'),
           ),
           body: Center(
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Center(
-                      child: Text('Top: $_statusBarHeight'),
-                    ),
+              child: Container(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Center(
+                    child: Text('Display Cutout: $_displayCutoutSize'),
                   ),
-                  TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      hintText: 'Click me and then update!',
-                    ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Text('Top: $_statusBarHeight'),
                   ),
-                  MaterialButton(
-                    onPressed: () => initPlatformState(),
-                    color: Colors.grey,
-                    child: Center(child: Text("Update"),),
+                ),
+                TextField(
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    hintText: 'Click me and then update!',
                   ),
-                  Expanded(
-                    child: Center(
-                      child: Text('Bottom: $_navigationBarHeight'),
-                    ),
+                ),
+                MaterialButton(
+                  onPressed: () => initPlatformState(),
+                  color: Colors.grey,
+                  child: Center(
+                    child: Text("Update"),
                   ),
-                ],
-              ),
-            )
-          ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Text('Bottom: $_navigationBarHeight'),
+                  ),
+                ),
+              ],
+            ),
+          )),
         ),
       ),
     );
